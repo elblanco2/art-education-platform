@@ -1,0 +1,45 @@
+# Core dependencies
+fastapi>=0.104.0
+uvicorn>=0.23.2
+pydantic>=2.4.2
+python-dotenv>=1.0.0
+aiohttp>=3.8.6
+
+# OCR and text processing
+pytesseract>=0.3.10
+pdf2image>=1.16.3
+Pillow>=10.0.1
+nltk>=3.8.1
+beautifulsoup4>=4.12.2
+
+# Vector database and embeddings
+langchain>=0.0.304
+faiss-cpu>=1.7.4
+sentence-transformers>=2.2.2
+
+# Fast Agent integration
+fast-agent>=0.1.0
+llama-cpp-python>=0.2.11
+transformers>=4.34.1
+einops>=0.7.0
+accelerate>=0.23.0
+
+# Canvas LMS integration
+canvasapi>=3.2.0
+pylti1p3>=2.0.0
+
+# mdBook utilities (Python wrappers)
+mdformat>=0.7.17
+markdown>=3.5
+pyyaml>=6.0.1
+
+# Security
+cryptography>=41.0.4
+pyjwt>=2.8.0
+bcrypt>=4.0.1
+
+# Development tools
+pytest>=7.4.3
+black>=23.10.1
+isort>=5.12.0
+flake8>=6.1.0

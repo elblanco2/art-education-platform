@@ -1,0 +1,61 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+env/
+ENV/
+
+# IDEs and editors
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Project specific
+.env
+config/.env
+*.log
+uploads/
+instances/
+deployments/
+canvas_data/
+lti_config/
+temp/
+
+# Security
+*.pem
+*.key
+*.cert
+*.pub
+*private*
+secrets/
+keyring/
+
+# Node modules (if used)
+node_modules/
+
+# Generated content
+book/
+output/
+generated/
