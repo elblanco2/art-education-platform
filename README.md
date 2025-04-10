@@ -9,7 +9,8 @@ This project aims to digitize art education materials and enhance them with AI c
 ## Features
 
 - Digital conversion of art textbooks
-- AI-enhanced content and interactions
+- Local LLM-enhanced content with no external API costs
+- Vector database storage for efficient knowledge retrieval
 - Canvas LMS integration
 - Interactive learning experiences
 - Customizable content for educators
@@ -22,15 +23,35 @@ chatbook/
 ├── requirements.txt   # Python dependencies
 ├── scripts/           # Setup and deployment scripts
 ├── src/               # Source code for the application
+│   ├── ai/            # Local LLM implementation and content enhancer
+│   ├── api/           # API endpoints
+│   ├── models/        # Data models
+│   └── services/      # Business logic and services
 ├── config/            # Configuration files
 └── .gitignore         # Git ignore rules
 ```
+
+## Local LLM Implementation
+
+This project uses a local Large Language Model (LLM) implementation instead of OpenAI API, eliminating API costs for students and faculty. Key features include:
+
+- **Hugging Face Models**: Utilizes open-source models from Hugging Face
+- **Pinecone Vector Database**: Stores and retrieves art-related content efficiently
+- **Sentence Transformers**: Generates embeddings for semantic search
+- **No API Costs**: All AI features run locally with no usage fees
+
+### AI Components:
+
+- `LocalLLM`: Core implementation of text generation capabilities
+- `ArtContentVectorStore`: Vector database management for art education content
+- `ContentEnhancer`: Services for enhancing textbook content with AI
 
 ## Getting Started
 
 ### Prerequisites
 
 - Python 3.8+
+- CUDA-capable GPU (recommended for optimal performance)
 - FastAPI
 - Canvas LMS access
 - Required Python packages (see requirements.txt)
@@ -60,7 +81,12 @@ chatbook/
    # Edit config/.env with your own credentials
    ```
 
-5. Run the application:
+5. Download LLM models (one-time setup):
+   ```
+   python scripts/download_models.py
+   ```
+
+6. Run the application:
    ```
    python src/main.py
    ```
@@ -72,7 +98,11 @@ Create a `.env` file based on the `.env.example` template with the following var
 - `CANVAS_API_URL` - Your Canvas LMS API URL
 - `CANVAS_API_KEY` - Your Canvas LMS API key
 - `DATABASE_URL` - Database connection string
-- `AI_SERVICE_KEY` - API key for AI service (if applicable)
+- `LLM_EMBEDDING_MODEL` - Sentence transformer model name
+- `LLM_GENERATION_MODEL` - Text generation model name
+- `PINECONE_API_KEY` - Pinecone API key for vector storage
+- `PINECONE_ENVIRONMENT` - Pinecone environment
+- `PINECONE_INDEX_NAME` - Pinecone index name
 
 ## Development
 
