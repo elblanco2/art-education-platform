@@ -1,0 +1,92 @@
+{
+  "projects": {
+    "art-education-platform": {
+      "description": "Art Education Platform with mdBook and Canvas LMS integration",
+      "repository": "https://github.com/elblanco2/art-education-platform.git",
+      "framework": "fastapi",
+      "hosting_providers": {
+        "netlify": {
+          "site_name": "art-education-platform",
+          "build_command": "pip install -r requirements.txt && python -m src.app",
+          "publish_directory": "book/html"
+        },
+        "vercel": {
+          "project_name": "art-education-platform",
+          "build_command": "pip install -r requirements.txt && python -m src.app",
+          "output_directory": "book/html"
+        },
+        "ssh": {
+          "host": "lucasblanco.com",
+          "username": "deploy_user",
+          "port": 22,
+          "remote_path": "/var/www/html/ed",
+          "use_key_auth": true
+        }
+      },
+      "environments": {
+        "production": {
+          "branch": "main",
+          "env_variables": [
+            "CANVAS_API_URL",
+            "SITE_URL",
+            "SECURE_KEY"
+          ]
+        },
+        "staging": {
+          "branch": "staging",
+          "env_variables": [
+            "CANVAS_API_URL",
+            "SITE_URL",
+            "SECURE_KEY"
+          ]
+        }
+      },
+      "security": {
+        "use_keyring": true,
+        "sensitive_env_vars": [
+          "CANVAS_API_KEY",
+          "SSH_KEY_PASSPHRASE"
+        ]
+      }
+    },
+    "apiprofe": {
+      "description": "Canvas API teaching resources for educators",
+      "repository": "https://github.com/elblanco2/apiprofe.git",
+      "framework": "wasp",
+      "hosting_providers": {
+        "netlify": {
+          "site_name": "apiprofe",
+          "build_command": "npm install && npm run build",
+          "publish_directory": "public"
+        },
+        "vercel": {
+          "project_name": "apiprofe",
+          "build_command": "npm install && npm run build",
+          "output_directory": "public"
+        }
+      },
+      "environments": {
+        "production": {
+          "branch": "main",
+          "env_variables": [
+            "API_URL",
+            "SITE_URL"
+          ]
+        }
+      },
+      "security": {
+        "use_keyring": true,
+        "sensitive_env_vars": [
+          "API_KEY",
+          "JWT_SECRET"
+        ]
+      }
+    }
+  },
+  "hostbridge": {
+    "credential_store": "keyring",
+    "debug": false,
+    "log_level": "INFO",
+    "default_provider": "netlify"
+  }
+}

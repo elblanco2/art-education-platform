@@ -1,11 +1,12 @@
-# Art Education Platform with mdBook and Fast Agent
+# Art Education Platform with mdBook and AI Integration
 
 ## Project Overview
 This platform provides an immersive educational experience by combining:
 - Art textbook content converted to mdBook format
-- AI assistance through Fast Agent with optimization for educational contexts
+- AI assistance through both Fast Agent and Local LLM implementation
 - Seamless Canvas LMS integration
 - Franchise model for instructor adoption
+- No external API costs through local model deployment
 
 ## Security Features
 - Secure authentication through Canvas LMS integration
@@ -23,16 +24,34 @@ This platform provides an immersive educational experience by combining:
 - `src/` - Source code for the application components
   - `ocr/` - OCR processing for textbook conversion
   - `mdbook/` - mdBook configuration and customization
+  - `ai/` - Local LLM implementation and content enhancer
   - `fastAgentIntegration/` - AI assistant integration
   - `canvasIntegration/` - Canvas LMS connectivity
   - `franchise/` - Franchise template system
   - `deployment/` - Deployment tools and integrations
   - `api/` - API endpoints and routing
+  - `models/` - Data models
+  - `services/` - Business logic and services
 - `docs/` - Documentation for various user roles
 - `tools/` - Utility scripts for conversion and management
 - `config/` - Configuration files
 - `scripts/` - Installation and deployment scripts
 - `assets/` - Static assets like images, stylesheets, etc.
+
+## Local LLM Implementation
+
+This project uses a local Large Language Model (LLM) implementation instead of OpenAI API, eliminating API costs for students and faculty. Key features include:
+
+- **Hugging Face Models**: Utilizes open-source models from Hugging Face
+- **Pinecone Vector Database**: Stores and retrieves art-related content efficiently
+- **Sentence Transformers**: Generates embeddings for semantic search
+- **No API Costs**: All AI features run locally with no usage fees
+
+### AI Components:
+
+- `LocalLLM`: Core implementation of text generation capabilities
+- `ArtContentVectorStore`: Vector database management for art education content
+- `ContentEnhancer`: Services for enhancing textbook content with AI
 
 ## Getting Started
 
@@ -41,34 +60,63 @@ This platform provides an immersive educational experience by combining:
 - Node.js 16+ (for frontend components)
 - Tesseract OCR for image processing
 - Git for version control
+- CUDA-capable GPU (recommended for optimal performance)
+- Canvas LMS access
+- Required Python packages (see requirements.txt)
 
 ### Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/art-education-platform.git
+   git clone https://github.com/elblanco2/art-education-platform.git
    cd art-education-platform
    ```
 
-2. Install dependencies:
+2. Create a virtual environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows, use: venv\Scripts\activate
+   ```
+
+3. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
 
-3. Configure environment:
+4. Configure environment:
    ```bash
    cp config/.env.example config/.env
    ```
    Edit the `.env` file with your specific configurations.
 
-4. Run setup script:
+5. Download LLM models (one-time setup):
+   ```bash
+   python scripts/download_models.py
+   ```
+
+6. Run setup script:
    ```bash
    ./scripts/setup.sh
    ```
 
-5. Start development server:
+7. Start development server:
    ```bash
    ./scripts/dev.sh
    ```
+
+## Configuration
+
+Create a `.env` file based on the `.env.example` template with the following variables:
+
+- `CANVAS_API_URL` - Your Canvas LMS API URL
+- `CANVAS_API_KEY` - Your Canvas LMS API key
+- `DATABASE_URL` - Database connection string
+- `LLM_EMBEDDING_MODEL` - Sentence transformer model name
+- `LLM_GENERATION_MODEL` - Text generation model name
+- `PINECONE_API_KEY` - Pinecone API key for vector storage
+- `PINECONE_ENVIRONMENT` - Pinecone environment
+- `PINECONE_INDEX_NAME` - Pinecone index name
+- `SITE_URL` - URL for the deployed application
+- `SECURE_KEY` - Secret key for JWT token generation
 
 ## Deployment Options
 
@@ -111,6 +159,17 @@ For conversational deployment through Claude and other AI assistants:
 2. Configure your hosting provider credentials
 3. Use Claude or another compatible AI assistant to deploy your instance through conversation
 
+## Development
+
+### Code Style
+This project follows PEP 8 style guidelines for Python code.
+
+### Testing
+Run tests with:
+```bash
+pytest
+```
+
 ## API Documentation
 The platform provides a comprehensive API for integrating with other systems:
 
@@ -127,8 +186,23 @@ The platform uses a franchise model to allow professors to create and maintain t
 4. Select subscription plan
 5. Publish to your students
 
+## Security Considerations
+- Do not commit sensitive data: API keys, passwords, tokens, or private credentials
+- Use environment variables for all sensitive data
+- Check for secrets before committing code
+- Validate all user inputs to prevent injection attacks
+- Always use HTTPS for all connections
+
 ## Contributing
 Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
 
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
 ## License
+This project is licensed under the MIT License - see the LICENSE file for details.
+
 Copyright 2025 Lucas Blanco
